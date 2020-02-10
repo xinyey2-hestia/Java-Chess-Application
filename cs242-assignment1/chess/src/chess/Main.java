@@ -17,6 +17,9 @@ public class Main {
 		rule.moveto(newboard[0][3],newboard,0,1);
 		//white rook move forward 2
 		rule.moveto(newboard[0][0],newboard,0,2);
+		//white rook move forward 2, check routeBlock, assert invalid
+		System.out.println("There is a pawn in front of you");
+		rule.moveto(newboard[0][2], newboard, 0, 4);
 		t.printall(newboard);
 		//move all 6 black pawns forward 2
 		rule.moveto(newboard[0][6],newboard,0,4);
