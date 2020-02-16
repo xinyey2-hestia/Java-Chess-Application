@@ -97,24 +97,36 @@ public class rule {
 			   changeColor(destx,desty-1,board);
 		   }
 		   if (checkvalid(board[destx][desty],destx+1,desty+1,board)&&board[destx][desty].color!=board[destx+1][desty+1].color) {
+			   changeColor(destx+1,desty+1,board);
 			   if (!checkTest(destx+1,desty+1,board)) {
+				   changeColor(destx+1,desty+1,board);
 			    	return false;
 			    }
+			   changeColor(destx+1,desty+1,board);
 		   }
 		   if (checkvalid(board[destx][desty],destx-1,desty-1,board)&&board[destx][desty].color!=board[destx-1][desty-1].color) {
+			   changeColor(destx-1,desty-1,board);
 			   if (!checkTest(destx-1,desty-1,board)) {
+				   changeColor(destx-1,desty-1,board);
 			    	return false;
 			    }
+			   changeColor(destx-1,desty-1,board);
 		   }
 		   if (checkvalid(board[destx][desty],destx+1,desty-1,board)&&board[destx][desty].color!=board[destx+1][desty-1].color) {
+			   changeColor(destx+1,desty-1,board);
 			   if (!checkTest(destx+1,desty-1,board)) {
+				   changeColor(destx+1,desty-1,board);
 			    	return false;
 			    }
+			   changeColor(destx+1,desty-1,board);
 		   }
 		   if (checkvalid(board[destx][desty],destx-1,desty+1,board)&&board[destx][desty].color!=board[destx-1][desty+1].color) {
+			   changeColor(destx-1,desty+1,board);
 			   if (!checkTest(destx-1,desty+1,board)) {
+				   changeColor(destx-1,desty+1,board);
 			    	return false;
 			    }
+			   changeColor(destx-1,desty+1,board);
 		   }
 		  
 		  }

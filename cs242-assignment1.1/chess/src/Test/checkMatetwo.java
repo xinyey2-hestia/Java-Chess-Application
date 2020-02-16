@@ -62,7 +62,8 @@ public class checkMatetwo {
 		rule.moveto(newboard[3][4], newboard, 3, 3);
 		newboard[3][4] = new rook(1,3,4,newboard);
 		rule.moveto(newboard[3][3], newboard, 3, 2);
-		rule.moveto(newboard[3][2], newboard, 3, 1);
+		int res = rule.moveto(newboard[3][2], newboard, 3, 1);
+		assertEquals(res,2);
 		t.printall(newboard);
 	}
 
