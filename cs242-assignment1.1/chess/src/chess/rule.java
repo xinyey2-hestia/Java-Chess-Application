@@ -38,7 +38,7 @@ public class rule {
 	}
 	
 	boolean checkTest (int destx, int desty, piece[][]board) {
-
+		System.out.println(board[destx][desty].color);
 		  for (int i =0; i <8; i++ ) {
 		   for (int j = 0; j< 8; j++) {
 		    if (board[i][j]!=null && board[i][j].color!=board[destx][desty].color && checkvalid(board[i][j],destx,desty,board)) {
@@ -53,16 +53,16 @@ public class rule {
 		    	
 		     return true;
 		    }
-		    else
-		    	continue;
 		   }
 		  }
+		  System.out.println("GG");
 		  return false;
 		 }
 		 
 	boolean checkMate(int destx, int desty, piece[][]board) {
 		  if (checkTest(destx,desty, board)) {
 			  System.out.println("yes u re checked");
+			
 		   if (checkvalid(board[destx][desty],destx+1,desty,board)&&board[destx][desty].color!=board[destx+1][desty].color) {
 			   changeColor(destx+1,desty,board);
 		    if (!checkTest(destx+1,desty,board)) {
@@ -118,21 +118,24 @@ public class rule {
 		   }
 		  
 		  }
+		  else
+			  System.out.print("you are safe now");
 		  
 		  return true;
 		 }
-	public void moveto(piece p, piece[][] board,int a, int b) {
+	public int moveto(piece p, piece[][] board,int a, int b) {
 
 		if (p==null) {
 			System.out.println("invalid move");
-			return ;
+			return 0;
 		}
-		else if (checkvalid(p,a,b,board)==true) {
+		
+		if (checkvalid(p,a,b,board)==true) {
 			int x=p.position.getx();
 			int y=p.position.gety();
 			if (board[a][b]!=null && p.color == board[a][b].color) {
 				System.out.println("You cannot eat your friends");
-				return;
+				return 0;
 			}	
 		
 			
@@ -141,14 +144,21 @@ public class rule {
 				if (Math.abs(x-a)==1 && Math.abs(y-b)==1) {
 					if (board[a][b]==null) {
 						System.out.println("invalid move");
-						return;
+						return 0;
 					}
 					else {
+						if (board[a][b].name =="king") {
+							System.out.println(a);
+							System.out.println(b);
+							System.out.println("Game over! Player" + p.color + " wins");
+							return 2;
+						}
 						board[a][b] = p;
 						board[x][y] = null;
 						p.position.setx(a);
 						p.position.sety(b);
-						return;
+						
+						return 1;
 					}
 				}
 				else {
@@ -158,11 +168,11 @@ public class rule {
 						board[x][y] = null;
 						p.position.setx(a);
 						p.position.sety(b);
-						return;
+						return 1;
 					}
 					else {
 						System.out.println("pawn cannot eat forward");
-						return;
+						return 0;
 					}
 				}
 			
@@ -180,6 +190,7 @@ public class rule {
 				System.out.println(a);
 				System.out.println(b);
 				System.out.println("Game over! Player" + p.color + " wins");
+				return 2;
 			}
 			}
 			board[x][y]=null;
@@ -191,14 +202,17 @@ public class rule {
 				int oppoking[]=findoppoking(p,board);
 				if (checkMate(oppoking[0],oppoking[1],board)) {
 					System.out.println("Check Mate, you win");
+					return 2;
 				}
 				
 				// checkmate detection
 			}
+			return 1;
 			
 		}
 		else {
-			System.out.println("invalid move");
+			System.out.println("false movement invalid move");
+			return 0;
 			
 		}
 		

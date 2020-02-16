@@ -1,9 +1,9 @@
 package chess;
 
 public class piece {
-	int color; // Distinguish players, 0 for white, 1 for black white go first
+	public int color; // Distinguish players, 0 for white, 1 for black white go first
 	position position = new position();
-	String name = "";
+	public String name = "";
 	public piece[][] board;
 	public piece(int color, int x, int y, piece[][] board) {
 		this.color = color;
@@ -54,7 +54,23 @@ public class piece {
     }
 
     public boolean routeBlockedRook(int desti, int destj, int locx, int locy){
-        if (desti < locx){ //moving backwards
+        if (destj < locy-1){ //moving backwards
+            for ( ; destj < locy-1; destj++){
+                piece p = board[locx][destj+1];
+                if (p != null){
+                    return true;
+                }
+            }
+        }
+        if (destj-1 > locy){ //moving forward
+            for ( ; locy < destj; destj--){
+                piece p = board[locx][destj];
+                if (p != null){
+                    return true;
+                }
+            }
+        }
+        if (desti < locx-1){ //moving left
             for ( ; desti < locx; desti++){
                 piece p = board[desti][locy];
                 if (p != null){
@@ -62,25 +78,9 @@ public class piece {
                 }
             }
         }
-        if (desti > locx){ //moving forward
+        if (desti-1 > locx){ //moving right
             for ( ; locx < desti; desti--){
-                piece p = board[desti][destj];
-                if (p != null){
-                    return true;
-                }
-            }
-        }
-        if (destj < locy){ //moving left
-            for ( ; destj < locy; destj++){
-                piece p = board[locx][destj];
-                if (p != null){
-                    return true;
-                }
-            }
-        }
-        if (destj > locy){ //moving right
-            for ( ; locy < destj; destj--){
-                piece p = board[desti][destj];
+                piece p = board[desti][locy];
                 if (p != null){
                     return true;
                 }
