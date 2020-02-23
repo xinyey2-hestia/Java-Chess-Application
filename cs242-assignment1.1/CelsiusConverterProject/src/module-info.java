@@ -1,3 +1,0 @@
-class CelsiusConverterProject {
-	int x;
-}
